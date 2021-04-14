@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 const homeController = require('./controllers/home');
 const config = require('./config.json');
+const employeeController = require('./controllers/employee');
 
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars({
@@ -22,13 +23,16 @@ app.engine('hbs', handlebars({
     }
 }));
 
-app.use(session({secret: 'test'}));
+app.use(session({ secret: 'test' }));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static(__dirname + '/views/public'));
 
 app.use('/', homeController);
 app.use('/home', homeController);
+
+app.use('/', employeeController);
+app.use('/employee', employeeController);
 
 app.listen(config.port, () => {
     console.log('Applicaton Start');
