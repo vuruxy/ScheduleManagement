@@ -6,6 +6,7 @@ const handlebars = require('express-handlebars');
 const homeController = require('./controllers/home');
 const config = require('./config.json');
 const employeeController = require('./controllers/employee');
+const loginController = require('./controllers/login');
 
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars({
@@ -31,8 +32,7 @@ app.use(express.static(__dirname + '/views/public'));
 app.use('/', homeController);
 app.use('/home', homeController);
 
-app.use('/', employeeController);
-app.use('/employee', employeeController);
+app.use('/login', loginController);
 
 app.listen(config.port, () => {
     console.log('Applicaton Start');
