@@ -9,11 +9,15 @@ const config = require('./config.json');
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars({
     layoutsDir: __dirname + '/views/layouts',
+    partialsDir: __dirname + '/views/partials',
     extname: 'hbs',
     defaultLayout: 'main',
     helpers: {
         url: () => {
             return 'http://' + config.host + ':' + config.port;
+        },
+        title: () => {
+            return config.title;
         }
     }
 }));
@@ -24,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static(__dirname + '/views/public'));
 
 app.use('/', homeController);
+app.use('/home', homeController);
 
 app.listen(config.port, () => {
     console.log('Applicaton Start');
