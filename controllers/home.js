@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let employeeService = require('../models/employee');
 
-router.get('/', function (req, res) {
-  res.render('home', {
-    test1: 'test1',
-    childContext: {
-      testing1: 'testing1',
-      testing2: 'testing2'
-    }
-  });
+router.get('/', async (req, res) => {
+  if (!employeeService.isLogIn(req.session.user)) {
+      res.redirect('/login');
+  } else { 
+      res.render('home', {
+          employee: req.session.user
+      });
+  }
 });
 
 module.exports = router;
