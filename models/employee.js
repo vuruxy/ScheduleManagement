@@ -14,7 +14,7 @@ module.exports = {
 		return await _employeeHelper.isAuthenticate(username, password);
 	},
 	setLogIn: async (session, username) => {
-		return await _employeeHelper.get(session, username);
+		return await _employeeHelper.setLogIn(session, username);
 	},
 	setLogOut: (session) => {
 		session.destory();
@@ -29,7 +29,7 @@ module.exports = {
 		return await _employeeHelper.getEmployee(username);
 	},
 	deleteEmployee: async (employeeId) => {
-		return await _employeeHelper.deleteEmployee(emplyoeeId);
+		return await _employeeHelper.deleteEmployee(employeeId);
 	}
 };
 class employeeHelper {
@@ -47,6 +47,14 @@ class employeeHelper {
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return fields && fields[0] ? fields[0] : null;
+		});
+	}
+	async setLogIn(session, username) {
+		let sql = "SELECT * FROM employee INNER JOIN role ON role.roleId = employee.roleId WHERE username = ?";
+		let param = [username];
+
+		await dbUtli.executeSql(sql, param).then(fields => {
+			session.user = fields && fields[0] ? fields[0] : null;
 		});
 	}
 	async setEmployee(emplyoee) {

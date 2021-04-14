@@ -1,13 +1,13 @@
 {
-    "databaseInfo": {
-        "host": "127.0.0.1",
-        "port": "3306",
-        "user": "root",
-        "password": "admin",
-        "database": "taskassignments",
-        "connectionLimit": 100
-    },
-    "port": 8080,
-    "host": "localhost",
-    "title": "Schedule Management"
+  "databaseInfo": {
+    "host": "127.0.0.1",
+    "port": "3306",
+    "user": "root",
+    "password": "Hlaingwaioo07",
+    "database": "scheduleManagements",
+    "connectionLimit": 100
+  },
+  "port": 8080,
+  "host": "localhost",
+  "title": "ScheduleManagements"
 }
