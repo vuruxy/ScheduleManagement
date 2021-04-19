@@ -1,22 +1,23 @@
-<h1>Employee Management</h1>
-<form method="POST">
-	<p>Name</p>
-	<input type="text" class="form-control" name="employeeName" />
-	<p>EmployeePhone</p>
-	<input type="text" class="form-control" name="employeePhone" />
-	<p>EmployeeAddress</p>
-	<input type="text" class="form-control" name="employeeAddress" />
-	<p>Username</p>
-	<input type="text" class="form-control" name="username" />
-	<p>Password</p>
-	<input type="text" class="form-control" name="password" />
-	<p>Role</p>
-	<select name="roleId">
-		<% roles.map(role => { %>
-		<option value="<%= role.roleId %>"><%= role.roleName %> </option>
-		<% }) %>
-	</select>
-	<br /><br />
-	<input type="submit" class="btn btn-primary" value="ADD" />
-	<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary" value="CANCEL" />
-</form>
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row home-content__main">
+			<h1>Employee Management</h1>
+			<form method="POST">
+				<p>Name</p>
+				<input type="text" class="form-control" name="employeeName" />
+				<p>EmployeePhone</p>
+				<input type="text" class="form-control" name="employeePhone" />
+				<p>EmployeeAddress</p>
+				<input type="text" class="form-control" name="employeeAddress" />
+				<p>Username</p>
+				<input type="text" class="form-control" name="username" />
+				<p>Password</p>
+				<input type="text" class="form-control" name="password" />
+
+				<input type="submit" class="btn btn-primary" value="ADD" />
+				<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
+					value="CANCEL" />
+			</form>
