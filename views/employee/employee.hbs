@@ -14,18 +14,18 @@
 						<th scope="col">EmployeePhone</th>
 						<th scope="col">EmployeeAddress</th>
 						<th scope="col">Role</th>
-						<th scope="col" Username></th>
-						<th scop="col" Password></th>
+						<th scope="col">Username</th>
+						<th scop="col">Password</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody>
-					{{#each employee}}
+				<tbody>{{log employees}}
+					{{#each employees}}
 					<tr>
-						<td>{{Name}}</td>
+						<td>{{name}}</td>
 						<td>{{phone}}</td>
 						<td>{{address}}</td>
-						<td>{{roleId}}</td>
+						<td>{{roleName}}</td>
 						<td>{{username}}</td>
 						<td>{{password}}</td>
 						<td>
@@ -38,3 +38,6 @@
 					{{/each}}
 				</tbody>
 			</table>
+		</div>
+	</div>
+</section>

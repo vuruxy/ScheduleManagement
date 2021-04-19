@@ -4,18 +4,13 @@ let router = express.Router();
 let roleService = require('../models/role');
 let employeeService = require('../models/employee');
 
-router.get('/', function (req, res) {
-	res.render('employee/employee');
-});
-
 router.get('/', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
-		if (req.session.user.createEmployee) {
+		if (req.session.user.canCreateEmployee) {
 			let employees = await employeeService.getEmployees();
-
-			res.render('views/employee', {
+			res.render('employee/employee', {
 				employees: employees,
 				employee: req.session.user
 			});
