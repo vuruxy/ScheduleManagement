@@ -5,7 +5,7 @@ let roleService = require('../models/role');
 let employeeService = require('../models/employee');
 
 router.get('/', function (req, res) {
-	res.render('employee');
+	res.render('employee/employee');
 });
 
 router.get('/', async (req, res) => {
