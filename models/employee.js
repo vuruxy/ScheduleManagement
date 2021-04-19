@@ -17,7 +17,7 @@ module.exports = {
 		return await _employeeHelper.setLogIn(session, username);
 	},
 	setLogOut: (session) => {
-		session.destory();
+		session.destroy();
 	},
 	getEmployeeById: async (employeeId) => {
 		return await _employeeHelper.getEmployeeById(employeeId);
@@ -58,23 +58,23 @@ class employeeHelper {
 		});
 	}
 	async setEmployee(emplyoee) {
-		let sql = "INSERT INTO employee (name, phoneNumber, address, roleId, username, password)" +
+		let sql = "INSERT INTO employee (name, phone, address, roleId, username, password)" +
 			"VALUES (?,?,?,?,?,?)";
-		let param = [emplyoee.name, emplyoee.phoneNumber, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
+		let param = [emplyoee.name, emplyoee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
 
 		return await dbHelper.executeSql(sql, param).then(fields => {
 			return true;
 		});
 	}
 	async updateEmployee(employee) {
-		let sql = "UPDATE employee SET name = ?, phoneNumber = ? , address = ? , roleId = ?, username =? " +
+		let sql = "UPDATE employee SET name = ?, phone = ? , address = ? , roleId = ?, username =? " +
 			"password =? WHERE username= ?)"
-		let param = [employee.name, employee.phoneNumber, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
+		let param = [employee.name, employee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
 		return await dbUtli.executeSql(sql, param).then(fileds => {
 			return true;
 		});
 	}
-	async deleteEmployee(employee) {
+	async deleteEmployee(employeeId) {
 		let sql = "DELETE employe WHERE employeeId = ? "
 		let param = [employeeId];
 		return await dbUtli.executeSql(sql, param).then(fields => {

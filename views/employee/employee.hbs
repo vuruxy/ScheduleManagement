@@ -1,0 +1,33 @@
+<h1>employee Management</h1>
+<br />
+<input type="button" onclick="window.location.href='/employee/add'" class="btn btn-primary" value="ADD" />
+<br /><br /><br />
+<table class="table table-bordered" style="color:white">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">EmployeePhone</th>
+			<th scope="col">EmployeeAddress</th>
+			<th scope="col">Role</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% employees.map(employee => { %>
+		<tr>
+			<td><%= employee.employeeName %></td>
+			<td><%= employee.employeePhone %></td>
+			<td><%= employee.employeeAddress %></td>
+			<td><%= employee.roleName %></td>
+			<td>
+				<input type="button"
+					onclick="window.location.href = '/employee/update?employeeId=<%= employee.employeeId %>';"
+					class="btn btn-primary" value="UPDATE" />
+				<input type="button"
+					onclick="window.location.href = '/employee/delete?employeeId=<%= employee.employeeId %>';"
+					class="btn btn-primary" value="DELETE" />
+			</td>
+		</tr>
+		<% }) %>
+	</tbody>
+</table>

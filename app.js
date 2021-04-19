@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 const homeController = require('./controllers/home');
 const config = require('./config.json');
+
 const employeeController = require('./controllers/employee');
 const loginController = require('./controllers/login');
 
@@ -31,7 +32,7 @@ app.use(express.static(__dirname + '/views/public'));
 
 app.use('/', homeController);
 app.use('/home', homeController);
-
+app.use('/employee', employeeController);
 app.use('/login', loginController);
 
 app.listen(config.port, () => {

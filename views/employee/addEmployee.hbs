@@ -1,0 +1,22 @@
+<h1>Employee Management</h1>
+<form method="POST">
+	<p>Name</p>
+	<input type="text" class="form-control" name="employeeName" />
+	<p>EmployeePhone</p>
+	<input type="text" class="form-control" name="employeePhone" />
+	<p>EmployeeAddress</p>
+	<input type="text" class="form-control" name="employeeAddress" />
+	<p>Username</p>
+	<input type="text" class="form-control" name="username" />
+	<p>Password</p>
+	<input type="text" class="form-control" name="password" />
+	<p>Role</p>
+	<select name="roleId">
+		<% roles.map(role => { %>
+		<option value="<%= role.roleId %>"><%= role.roleName %> </option>
+		<% }) %>
+	</select>
+	<br /><br />
+	<input type="submit" class="btn btn-primary" value="ADD" />
+	<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary" value="CANCEL" />
+</form>

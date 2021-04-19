@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', async (req, res) => {
     employeeService.setLogOut(req.session);
     res.redirect('/login');
 });
