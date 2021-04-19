@@ -17,4 +17,14 @@ router.get('/', async (req, res) => {
 	}
 });
 
+router.get('/add', async (req, res) => {
+	if (!employeeService.isLogIn(req.session.user)) {
+		res.redirect('/login');
+	} else {
+		res.render('role/addRole', {
+			employee: req.session.user
+		});
+	}
+});
+
 module.exports = router;

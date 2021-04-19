@@ -20,10 +20,10 @@
                     {{#each roles}}
                     <tr>
                         <td>{{roleName}}</td>
-                        <td>{{canViewReport}}</td>
-                        <td>{{canCreateEmployee}}</td>
-                        <td>{{canAssignJob}}</td>
-                        <td>{{canCreateJob}}</td>
+                        <td>{{#if canViewReport}} true {{else}} false {{/if}}</td>
+                        <td>{{#if canCreateEmployee}} true {{else}} false {{/if}}</td>
+                        <td>{{#if canAssignJob}} true {{else}} false {{/if}}</td>
+                        <td>{{#if canCreateJob}} true {{else}} false {{/if}}</td>
                         <td>
                             <input type="button"
                                 onclick="window.location.href = '/role/update?roleId={{roleId}}';"
