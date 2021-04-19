@@ -8,6 +8,7 @@ const config = require('./config.json');
 
 const employeeController = require('./controllers/employee');
 const loginController = require('./controllers/login');
+const roleController = require('./controllers/role');
 
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars({
@@ -34,6 +35,7 @@ app.use('/', homeController);
 app.use('/home', homeController);
 app.use('/employee', employeeController);
 app.use('/login', loginController);
+app.use('/role', roleController);
 
 app.listen(config.port, () => {
     console.log('Applicaton Start');

@@ -22,6 +22,9 @@ module.exports = {
 	getEmployeeById: async (employeeId) => {
 		return await _employeeHelper.getEmployeeById(employeeId);
 	},
+	setEmployee: async (employee) => {
+		return await _employeeHelper.setEmployee(employee)
+	},
 	getEmployees: async () => {
 		return await _employeeHelper.getEmployees();
 	},
@@ -62,7 +65,7 @@ class employeeHelper {
 			"VALUES (?,?,?,?,?,?)";
 		let param = [emplyoee.name, emplyoee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
 
-		return await dbHelper.executeSql(sql, param).then(fields => {
+		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;
 		});
 	}
@@ -70,6 +73,7 @@ class employeeHelper {
 		let sql = "UPDATE employee SET name = ?, phone = ? , address = ? , roleId = ?, username =? " +
 			"password =? WHERE username= ?)"
 		let param = [employee.name, employee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
+
 		return await dbUtli.executeSql(sql, param).then(fileds => {
 			return true;
 		});
@@ -84,6 +88,7 @@ class employeeHelper {
 	async isAuthenticate(username, password) {
 		let sql = "SELECT * FROM employee WHERE username =? AND password =?";
 		let param = [username, password];
+
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			if (fields.length > 0) {
 				return true;
@@ -94,6 +99,7 @@ class employeeHelper {
 	async getEmployeeById(employeeId) {
 		let sql = "SELECT * FROM employee INNER JOIN role ON role.roleID = employee.employeeId WHERE employeeID =? ";
 		let param = [employeeId];
+
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;
 		});

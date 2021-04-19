@@ -1,6 +1,6 @@
 let dbUtli = require('../utilities/dbUtli');
 
-module.exprots = {
+module.exports = {
 
 	getRoles: async () => {
 		let sql = "SELECT * FROM role";
@@ -18,7 +18,7 @@ module.exprots = {
 			return true;
 		});
 	},
-	getRole: async (role) => {
+	getRole: async (roleId) => {
 		let sql = "SELECT * FROM role WHERE roleId = roleId";
 		let param = [roleId];
 		return await dbUtli.executeSql(sql, param).then(fields => {

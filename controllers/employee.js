@@ -30,7 +30,7 @@ router.get('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
-		res.render('views/addemployee', { employee: req.session.user, roles: roles });
+		res.render('employee/addemployee', { employee: req.session.user, roles: roles });
 	}
 });
 
@@ -56,9 +56,9 @@ router.get('/update', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
-		let updateEmployee = await employeeService.getEmployeeById(req.session.user);
+		let updateEmployee = await employeeService.getEmployeeById(req.query.employeeId);
 
-		res.render('views/updateEmployee', {
+		res.render('employee/updateEmployee', {
 			employee: req.session.user,
 			roles: roles,
 			updateEmployee: updateEmployee
