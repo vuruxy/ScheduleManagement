@@ -4,37 +4,37 @@ let router = express.Router();
 let roleService = require('../models/role');
 let employeeService = require('../models/employee');
 
-router.get('/employee', function (req, res) {
+router.get('/', function (req, res) {
 	res.render('employee');
 });
 
-router.get('/employee', async (req, res) => {
+router.get('/', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
 		if (req.session.user.createEmployee) {
 			let employees = await employeeService.getEmployees();
 
-			res.render('views/employee/employee', {
+			res.render('views/employee', {
 				employees: employees,
 				employee: req.session.user
 			});
 		} else {
-			res.redirect('/employee/updateEmployee?employeeId=' + req.session.user.employeeId);
+			res.redirect('/updateEmployee?employeeId=' + req.session.user.employeeId);
 		}
 	}
 });
 
-router.get('/employee/add', async (req, res) => {
+router.get('/add', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
-		res.render('views/employee/addemployee', { employee: req.session.user, roles: roles });
+		res.render('views/addemployee', { employee: req.session.user, roles: roles });
 	}
 });
 
-router.post('/employee/add', async (req, res) => {
+router.post('/add', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
@@ -51,14 +51,14 @@ router.post('/employee/add', async (req, res) => {
 	}
 });
 
-router.get('/employee/update', async (req, res) => {
+router.get('/update', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
 		let updateEmployee = await employeeService.getEmployeeById(req.session.user);
 
-		res.render('views/employee/updateEmployee', {
+		res.render('views/updateEmployee', {
 			employee: req.session.user,
 			roles: roles,
 			updateEmployee: updateEmployee
@@ -66,7 +66,7 @@ router.get('/employee/update', async (req, res) => {
 	}
 });
 
-router.post('/employee/update', async (req, res) => {
+router.post('/update', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
@@ -84,7 +84,7 @@ router.post('/employee/update', async (req, res) => {
 	}
 });
 
-router.get('/employee/delete', async (req, res) => {
+router.get('/delete', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
