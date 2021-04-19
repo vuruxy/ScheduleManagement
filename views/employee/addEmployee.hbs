@@ -5,19 +5,39 @@
 	<div class="home-content">
 		<div class="row home-content__main">
 			<h1>Employee Management</h1>
-			<form method="POST">
-				<p>Name</p>
-				<input type="text" class="form-control" name="employeeName" />
-				<p>EmployeePhone</p>
-				<input type="text" class="form-control" name="employeePhone" />
-				<p>EmployeeAddress</p>
-				<input type="text" class="form-control" name="employeeAddress" />
-				<p>Username</p>
-				<input type="text" class="form-control" name="username" />
-				<p>Password</p>
-				<input type="text" class="form-control" name="password" />
-
-				<input type="submit" class="btn btn-primary" value="ADD" />
-				<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
-					value="CANCEL" />
-			</form>
+			<table class="table table-bordered" style="color:white">
+				<thead>
+					<form method="POST">
+						<p>Name</p>
+						<input type="text" class="form-control" name="name" />
+						<p>Phone</p>
+						<input type="text" class="form-control" name="phone" />
+						<p>Address</p>
+						<input type="text" class="form-control" name="address" />
+						<p>Username</p>
+						<input type="text" class="form-control" name="username" />
+						<p>Password</p>
+						<input type="text" class="form-control" name="password" />
+				</thead>
+				<tbody>
+					{{#each employees}}
+					<tr>
+						<td>{{employeeName}}</td>
+						<td>{{phone}}</td>
+						<td>{{address}}</td>
+						<td>{{roleId}}</td>
+						<td>{{username}}</td>
+						<td>{{password}}</td>
+						<td>
+							<input type="button" onclick="window.location.href = '/employee/add?employee={{employee}}';"
+								class="btn btn-primary" value="Add" />
+							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
+								value="CANCEL" />
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

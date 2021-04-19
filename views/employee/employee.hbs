@@ -1,33 +1,40 @@
-<h1>employee Management</h1>
-<br />
-<input type="button" onclick="window.location.href='/employee/add'" class="btn btn-primary" value="ADD" />
-<br /><br /><br />
-<table class="table table-bordered" style="color:white">
-	<thead>
-		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">EmployeePhone</th>
-			<th scope="col">EmployeeAddress</th>
-			<th scope="col">Role</th>
-			<th scope="col"></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% employees.map(employee => { %>
-		<tr>
-			<td><%= employee.employeeName %></td>
-			<td><%= employee.employeePhone %></td>
-			<td><%= employee.employeeAddress %></td>
-			<td><%= employee.roleName %></td>
-			<td>
-				<input type="button"
-					onclick="window.location.href = '/employee/update?employeeId=<%= employee.employeeId %>';"
-					class="btn btn-primary" value="UPDATE" />
-				<input type="button"
-					onclick="window.location.href = '/employee/delete?employeeId=<%= employee.employeeId %>';"
-					class="btn btn-primary" value="DELETE" />
-			</td>
-		</tr>
-		<% }) %>
-	</tbody>
-</table>
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row home-content__main">
+			<h1>Employee Management</h1><br />
+			<input type="button" onclick="window.location.href='/employee/add'" class="btn btn-primary" value="ADD" />
+			<br /><br /><br />
+			<table class="table table-bordered" style="color:white">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">EmployeePhone</th>
+						<th scope="col">EmployeeAddress</th>
+						<th scope="col">Role</th>
+						<th scope="col" Username></th>
+						<th scop="col" Password></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each employee}}
+					<tr>
+						<td>{{Name}}</td>
+						<td>{{phone}}</td>
+						<td>{{address}}</td>
+						<td>{{roleId}}</td>
+						<td>{{username}}</td>
+						<td>{{password}}</td>
+						<td>
+							<input type="button" onclick="window.location.href = '/employee/add?employee={{employee}}';"
+								class="btn btn-primary" value="Add" />
+							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
+								value="CANCEL" />
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
