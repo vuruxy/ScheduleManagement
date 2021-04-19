@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   if (!employeeService.isLogIn(req.session.user)) {
       res.redirect('/login');
   } else { 
-      res.render('home', {
+      res.render('home/home', {
           employee: req.session.user
       });
   }

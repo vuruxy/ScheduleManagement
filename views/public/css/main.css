@@ -435,7 +435,7 @@ th, td {
 }
 
 th {
-    color: #000000;
+    color: #E8E8E8;
     font-family: "montserrat-bold", sans-serif;
 }
 
@@ -443,12 +443,8 @@ td {
     line-height: 1.5;
 }
 
-th:first-child, td:first-child {
-    padding-left: 0;
-}
-
-th:last-child, td:last-child {
-    padding-right: 0;
+th, td {
+    padding: 0;
 }
 
 .table-responsive {
@@ -791,10 +787,9 @@ input[type="button"] {
     font-family: "montserrat-medium", sans-serif;
     font-size: 1.2rem;
     text-transform: uppercase;
-    letter-spacing: .3rem;
     height: 5.4rem;
     line-height: calc(5.4rem - .4rem);
-    padding: 0 3rem;
+    padding: 0 2rem;
     margin: 0 .3rem 1.2rem 0;
     color: #000000;
     text-decoration: none;
@@ -1821,11 +1816,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .home-content__buttons .btn {
-    width: 215px;
     border-color: #FFFFFF;
-    color: #FFFFFF;
-    margin: 1.5rem 1.5rem 0 0;
-    letter-spacing: .25rem;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
 }

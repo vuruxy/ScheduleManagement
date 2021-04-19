@@ -1,0 +1,41 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+    <div class="overlay"></div>
+    <div class="shadow-overlay"></div>
+    <div class="home-content">
+        <div class="row home-content__main">
+            <h1>employee Management</h1>
+            <input type="button" onclick="window.location.href='/employee/add'" class="btn btn-primary" value="ADD" />
+            <table class="table table-bordered" style="color:white">
+                <thead>
+                    <tr>
+                        <th scope="col">Role Name</th>
+                        <th scope="col">View Report</th>
+                        <th scope="col">Create Employee</th>
+                        <th scope="col">Assign Job</th>
+                        <th scope="col">Create Job</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each roles}}
+                    <tr>
+                        <td>{{roleName}}</td>
+                        <td>{{canViewReport}}</td>
+                        <td>{{canCreateEmployee}}</td>
+                        <td>{{canAssignJob}}</td>
+                        <td>{{canCreateJob}}</td>
+                        <td>
+                            <input type="button"
+                                onclick="window.location.href = '/role/update?roleId={{roleId}}';"
+                                class="btn btn-primary" value="UPDATE" />
+                            <input type="button"
+                                onclick="window.location.href = '/role/delete?employeeId={{roleId}}';"
+                                class="btn btn-primary" value="DELETE" />
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
