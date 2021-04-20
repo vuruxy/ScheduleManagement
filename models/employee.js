@@ -10,6 +10,7 @@ module.exports = {
 			return false;
 		}
 	},
+
 	isAuthenticate: async (username, password) => {
 		return await _employeeHelper.isAuthenticate(username, password);
 	},
@@ -24,6 +25,9 @@ module.exports = {
 	},
 	setEmployee: async (employee) => {
 		return await _employeeHelper.setEmployee(employee)
+	},
+	updateEmployee: async (employee) => {
+		return await _employeeHelper.updateEmployee(employee);
 	},
 	getEmployees: async () => {
 		return await _employeeHelper.getEmployees();
@@ -66,17 +70,19 @@ class employeeHelper {
 		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password];
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
-			console.log(employee);
 			return true;
 		});
 	}
 	async updateEmployee(employee) {
 		let sql = "UPDATE employee SET name = ?, phone = ? , address = ? , roleId = ?, username =? " +
-			"password =? WHERE username= ?)"
-		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password];
+			", password =? WHERE employeeId= ?"
+		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password, employee.employeeId];
 
 		return await dbUtli.executeSql(sql, param).then(fileds => {
+			console.log(req.body);
+
 			return true;
+
 		});
 	}
 	async deleteEmployee(employeeId) {

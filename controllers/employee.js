@@ -34,15 +34,13 @@ router.post('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		await employeeService.setEmployee({
-			Name: req.body.employeeName,
-			Phone: req.body.employeePhone,
-			Address: req.body.employeeAddress,
+			name: req.body.name,
+			phone: req.body.phone,
+			address: req.body.address,
 			username: req.body.username,
 			password: req.body.password,
 			roleId: req.body.roleId
 		});
-		console.log(req.body);
-
 		res.redirect('/employee');
 	}
 });
@@ -67,15 +65,14 @@ router.post('/update', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		await employeeService.updateEmployee({
-			employeeName: req.body.employeeName,
-			employeePhone: req.body.employeePhone,
-			employeeAddress: req.body.employeeAddress,
+			name: req.body.name,
+			phone: req.body.phone,
+			address: req.body.address,
 			username: req.body.username,
 			password: req.body.password,
 			roleId: req.body.roleId,
 			employeeId: parseInt(req.body.employeeId)
 		});
-
 		res.redirect('/employee');
 	}
 });
