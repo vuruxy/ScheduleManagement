@@ -38,7 +38,7 @@ module.exports = {
 		});
 	},
 	deleteRole: async (roleId) => {
-		let sql = "DELETE FROM roleId =?"
+		let sql = "DELETE FROM role WHERE roleId = ?"
 		let param = [roleId];
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return fields;

@@ -61,7 +61,18 @@ class employeeHelper {
 		let param = [username];
 
 		await dbUtli.executeSql(sql, param).then(fields => {
-			session.user = fields && fields[0] ? fields[0] : null;
+			let user = fields && fields[0] ? fields[0] : null;
+
+			if (user) {
+				session.user = {
+					employeeId: user.employee,
+					name: user.name,
+					canViewReport: user.canViewReport == '1' ? true : false,
+					canCreateEmployee: user.canCreateEmployee == '1' ? true : false,
+					canAssginJob: user.canAssginJob == '1' ? true : false,
+					canCreateJob: user.canCreateJob == '1' ? true : false
+				}
+			}
 		});
 	}
 	async setEmployee(employee) {

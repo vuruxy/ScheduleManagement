@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     employeeService.setLogOut(req.session);
-    res.redirect('home/login');
+    res.redirect('/login');
 });
 
 module.exports = router;
