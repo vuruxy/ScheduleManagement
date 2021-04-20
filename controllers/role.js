@@ -84,17 +84,13 @@ router.post('/update', async (req, res) => {
 	}
 });
 
-router.post('/delete', async (req, res) => {
-	if (!employeeService.isLogIn(req.session.roleId)) {
+router.get('/delete', async (req, res) => {
+	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
-		res.render('/views/notification/alert', {
-			role: req.session.user,
-			title: "Roles Management",
-			message: "Role has been deleted",
-			redirect: '/role',
-			redirectMessage: "Go Back To Role"
-		});
+		await roleService.deleteRole(req.query.roleId);
+
+		res.redirect('/role');
 	}
 });
 
