@@ -11,23 +11,25 @@ module.exports = {
 		});
 	},
 	setRoles: async (role) => {
-		let sql = "INSERT INTO role(roleId, name, viewReport, canCreateJob, assignJob)" +
-			"Value(?,?,?,?,?)";
-		let param = [role.roleId, role.name, role.viewReport, role.canCreateJob, role.assignJob];
+		let sql = "INSERT INTO role (roleName, canViewReport, canCreateEmployee, canAssginJob," +
+				  "canCreateJob) VALUES (?,?,?,?,?)";
+		let param = [role.roleName, role.canViewReport, role.canCreateEmployee, 
+					 role.canAssginJob, role.canCreateJob];
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;
 		});
 	},
 	getRole: async (roleId) => {
-		let sql = "SELECT * FROM role WHERE roleId = roleId";
+		let sql = "SELECT * FROM role WHERE roleId = ?";
 		let param = [roleId];
+
 		return await dbUtli.executeSql(sql, param).then(fields => {
-			return fields;
+			return fields && fields[0] ? fields[0] : null;
 		});
 	},
 	updateRole: async (role) => {
-		let sql = "UPDATE role SET roleName = ?, canViewReport = ? , canCreateEmployee = ?, canCreateJob = ? , canAssginJob =? " +
-			"WHERE roleId = ?)"
+		let sql = "UPDATE role SET roleName = ?, canViewReport = ? , canCreateEmployee = ?, canCreateJob = ? , canAssginJob = ? " +
+			"WHERE roleId = ?"
 
 		let param = [role.roleName, role.canViewReport, role.canCreateEmployee, role.canAssginJob, role.canCreateJob, role.roleId];
 
