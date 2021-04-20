@@ -30,7 +30,7 @@ router.get('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
-		res.render('employee/addemployee', { employee: req.session.user, roles: roles });
+		res.render('employee/addEmployee', { employee: req.session.user, roles: roles });
 	}
 });
 
@@ -39,13 +39,14 @@ router.post('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		await employeeService.setEmployee({
-			employeeName: req.body.employeeName,
-			employeePhone: req.body.employeePhone,
-			employeeAddress: req.body.employeeAddress,
+			Name: req.body.employeeName,
+			Phone: req.body.employeePhone,
+			Address: req.body.employeeAddress,
 			username: req.body.username,
 			password: req.body.password,
 			roleId: req.body.roleId
 		});
+		console.log(req.body);
 
 		res.redirect('/employee');
 	}

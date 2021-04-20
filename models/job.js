@@ -1,5 +1,4 @@
 const dbUtli = require('../utilities/dbUtli');
-var dbUtli = require('../utilities/dbUtli');
 
 module.exports = {
 	getJobByEmployeeId: async (employeeId) => {
@@ -17,10 +16,10 @@ module.exports = {
 	setJobs: async (job) => {
 		return await _jobHelper.setJobs(job);
 	},
-	updatejob: async (job) => {
+	updateJob: async (job) => {
 		return await _jobHelper.updatejob(job);
 	},
-	deletejob: async (jobId) => {
+	deleteJob: async (jobId) => {
 		return await _jobHelper.deleteJob(jobId);
 	}
 }
@@ -70,6 +69,15 @@ class jobHelper {
 	async deleteJob(jobId) {
 		let sql = "DELETE job FROM job WHERE jobId = ? ";
 		let param = [jobId];
+
+		return await dbUtli.executeSql(sql, param).then(fields => {
+			return true;
+		});
+	}
+	async updateJob(job) {
+		let sql = "UPDATE job SET jobName = ?, startDate = ?, endDate = ?" +
+			" WHERE jobId = ?"
+		let param = [job.jobName, job.startDate, job.endDate, job.jobId];
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;

@@ -1,0 +1,35 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row home-content__main">
+			<h1>Job Management</h1><br />
+			<input type="button" onclick="window.location.href='/job/add'" class="btn btn-primary" value="ADD" />
+			<br /><br /><br />
+			<table class="table table-bordered" style="color:white">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Start Date</th>
+						<th scope="col">End Date</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each job}}
+					<tr>
+						<td>{{jobName}}</td>
+						<td>{{Start}}</td>
+						<td>{{End}}</td>
+						<td>{{createJob}}</td>
+						<td>
+							<input type="button" onclick="window.location.href = '/employee/add?employee={{employee}}';"
+								class="btn btn-primary" value="Add" />
+							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
+								value="CANCEL" />
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>

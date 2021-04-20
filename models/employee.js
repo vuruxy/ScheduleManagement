@@ -60,19 +60,20 @@ class employeeHelper {
 			session.user = fields && fields[0] ? fields[0] : null;
 		});
 	}
-	async setEmployee(emplyoee) {
+	async setEmployee(employee) {
 		let sql = "INSERT INTO employee (name, phone, address, roleId, username, password)" +
 			"VALUES (?,?,?,?,?,?)";
-		let param = [emplyoee.name, emplyoee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
+		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password];
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
+			console.log(employee);
 			return true;
 		});
 	}
 	async updateEmployee(employee) {
 		let sql = "UPDATE employee SET name = ?, phone = ? , address = ? , roleId = ?, username =? " +
 			"password =? WHERE username= ?)"
-		let param = [employee.name, employee.phone, emplyoee.address, emplyoee.roleId, emplyoee.username, emplyoee.password];
+		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password];
 
 		return await dbUtli.executeSql(sql, param).then(fileds => {
 			return true;
