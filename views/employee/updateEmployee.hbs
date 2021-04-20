@@ -1,0 +1,54 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row contact-content">
+			<h1>Add Employee</h1>
+			<form method="post" novalidate="novalidate">
+				<fieldset>
+
+					<div class="form-field">
+						<label for="name" class="subscribe-message">Name</label>
+						<input id="name" name="name" type="text">
+					</div>
+					<div class="form-field">
+						<label for="phone" class="subscribe-message">PhoneNumber</label>
+						<input id="phone" name="phone" type="text">
+					</div>
+					<div class="form-field">
+						<label for="address" class="subscribe-message">Address</label>
+						<input id="addreess" name="address" type="text">
+					</div>
+					<div class="form-field">
+						<label for="username" class="subscribe-message">UserName</label>
+						<input id="username" name="username" type="text">
+					</div>
+					<div class="form-field">
+						<label for="password" class="subscribe-message">Password</label>
+						<input id="password" name="password" type="text">
+					</div>
+					<tbody>
+						{{#each employee}}
+						<tr>
+							<td>{{name}}</td>
+							<td>{{phone}}</td>
+							<td>{{address}}</td>
+							<td>{{username}}</td>
+							<td>{{password}}</td>
+							<td>
+						</tr>
+						<td>
+							<input type="button"
+								onclick="window.location.href = '/employee/update?employeeId={{employeeId}}';"
+								class="btn btn-primary" value="Add" />
+							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
+								value="CANCEL" />
+						</td>
+				</fieldset>
+				{{/each}}
+				</tbody>
+			</form>
+		</div>
+	</div>
+</section>
