@@ -29,6 +29,14 @@
 						<input id="password" name="password" type="text">
 					</div>
 					<div class="form-field">
+						<label for="password" class="subscribe-message">Role</label>
+						<select name="roldId">
+							{{#each roles}}
+								<option value={{roleId}}>{{roleName}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<div class="form-field">
 						<button type="submit" class="btn--primary">Submit</button>
 						<button type="button" onclick="window.location.href='/employee/add?employee'"
 							class="btn--primary">Cancel</button>

@@ -25,7 +25,11 @@ router.get('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		let roles = await roleService.getRoles();
-		res.render('employee/addEmployee', { employee: req.session.user, roles: roles });
+		
+		res.render('employee/addEmployee', { 
+			employee: req.session.user, 
+			roles: roles 
+		});
 	}
 });
 
