@@ -19,7 +19,7 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody>{{log employees}}
+				<tbody>
 					{{#each employees}}
 					<tr>
 						<td>{{name}}</td>
@@ -29,10 +29,10 @@
 						<td>{{username}}</td>
 						<td>{{password}}</td>
 						<td>
-							<input type="button" onclick="window.location.href = '/employee/add?employee={{employee}}';"
-								class="btn btn-primary" value="Add" />
-							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
-								value="CANCEL" />
+							<input type="button" onclick="window.location.href = '/employee/update?employeeId={{employeeId}}';"
+								class="btn btn-primary" value="UPDATE" />
+							<input type="button" onclick="window.location.href='/employee/delete?employeeId={{employeeId}}';" class="btn btn-primary"
+								value="DELETE" />
 						</td>
 					</tr>
 					{{/each}}

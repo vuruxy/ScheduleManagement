@@ -10,44 +10,38 @@
 
 					<div class="form-field">
 						<label for="name" class="subscribe-message">Name</label>
-						<input id="name" name="name" type="text">
+						<input id="name" value="{{updateEmployee.name}}" name="name" type="text">
 					</div>
 					<div class="form-field">
 						<label for="phone" class="subscribe-message">PhoneNumber</label>
-						<input id="phone" name="phone" type="text">
+						<input id="phone" value="{{updateEmployee.phone}}" name="phone" type="text">
 					</div>
 					<div class="form-field">
 						<label for="address" class="subscribe-message">Address</label>
-						<input id="addreess" name="address" type="text">
+						<input id="address" value="{{updateEmployee.address}}" name="address" type="text">
 					</div>
 					<div class="form-field">
 						<label for="username" class="subscribe-message">UserName</label>
-						<input id="username" name="username" type="text">
+						<input id="username" value="{{updateEmployee.username}}" name="username" type="text">
 					</div>
 					<div class="form-field">
 						<label for="password" class="subscribe-message">Password</label>
-						<input id="password" name="password" type="text">
+						<input id="password" value="{{updateEmployee.password}}" name="password" type="text">
 					</div>
-					<tbody>
-						{{#each employee}}
-						<tr>
-							<td>{{name}}</td>
-							<td>{{phone}}</td>
-							<td>{{address}}</td>
-							<td>{{username}}</td>
-							<td>{{password}}</td>
-							<td>
-						</tr>
-						<td>
-							<input type="button"
-								onclick="window.location.href = '/employee/update?employeeId={{employeeId}}';"
-								class="btn btn-primary" value="Add" />
-							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
-								value="CANCEL" />
-						</td>
+					<div class="form-field">
+						<label for="password" class="subscribe-message">Role</label>
+						<select name="roleId">
+							{{#each roles}}
+								<option value={{roleId}} {{#if isSelected}} selected {{/if}} >{{roleName}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<div class="form-field">
+						<button type="submit" class="btn--primary">Submit</button>
+						<button type="button" onclick="window.location.href='/employee'"
+							class="btn--primary">Cancel</button>
+					</div>
 				</fieldset>
-				{{/each}}
-				</tbody>
 			</form>
 		</div>
 	</div>

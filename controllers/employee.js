@@ -43,7 +43,7 @@ router.post('/add', async (req, res) => {
 			address: req.body.address,
 			username: req.body.username,
 			password: req.body.password,
-			roleId: req.body.roleId
+			roleId: parseInt(req.body.roleId)
 		});
 		res.redirect('/employee');
 	}
@@ -58,7 +58,13 @@ router.get('/update', async (req, res) => {
 
 		res.render('employee/updateEmployee', {
 			employee: req.session.user,
-			roles: roles,
+			roles: roles.map(role => {
+				return {
+					roleId: role.roleId,
+					roleName: role.roleName,
+					isSelected: role.roleId == updateEmployee.roleId
+				}
+			}),
 			updateEmployee: updateEmployee
 		});
 	}
@@ -74,8 +80,8 @@ router.post('/update', async (req, res) => {
 			address: req.body.address,
 			username: req.body.username,
 			password: req.body.password,
-			roleId: req.body.roleId,
-			employeeId: parseInt(req.body.employeeId)
+			roleId: parseInt(req.body.roleId),
+			employeeId: parseInt(req.query.employeeId)
 		});
 		res.redirect('/employee');
 	}
@@ -87,13 +93,7 @@ router.get('/delete', async (req, res) => {
 	} else {
 		await employeeService.deleteEmployee(req.query.employeeId);
 
-		res.render('/views/notification/alert', {
-			employee: req.session.user,
-			title: "Employee Management",
-			message: "Employee has been deleted",
-			redirect: '/employee',
-			redirectMessage: "Go Back To Employee"
-		});
+		res.redirect('/employee');
 	}
 });
 

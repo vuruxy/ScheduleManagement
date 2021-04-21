@@ -58,7 +58,7 @@ class jobHelper {
 			return fields && fields[0] ? fields[0] : null;
 		});
 	}
-	async setJob(job) {
+	async setJob(job) { 
 		let sql = "INSERT INTO job (jobName, startDate, endDate) VALUE (?,?,?)";
 		let param = [job.jobName, job.startDate, job.endDate];
 

@@ -79,7 +79,7 @@ class employeeHelper {
 		let sql = "INSERT INTO employee (name, phone, address, roleId, username, password)" +
 			"VALUES (?,?,?,?,?,?)";
 		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password];
-
+	
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;
 		});
@@ -90,14 +90,12 @@ class employeeHelper {
 		let param = [employee.name, employee.phone, employee.address, employee.roleId, employee.username, employee.password, employee.employeeId];
 
 		return await dbUtli.executeSql(sql, param).then(fileds => {
-			console.log(req.body);
-
 			return true;
 
 		});
 	}
 	async deleteEmployee(employeeId) {
-		let sql = "DELETE employe WHERE employeeId = ? "
+		let sql = "DELETE FROM employee WHERE employeeId = ? "
 		let param = [employeeId];
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return true;
@@ -115,11 +113,11 @@ class employeeHelper {
 		});
 	}
 	async getEmployeeById(employeeId) {
-		let sql = "SELECT * FROM employee INNER JOIN role ON role.roleID = employee.employeeId WHERE employeeID =? ";
+		let sql = "SELECT * FROM employee INNER JOIN role ON role.roleID = employee.roleId WHERE employeeID =? ";
 		let param = [employeeId];
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
-			return true;
+			return fields && fields[0] ? fields[0] : null;
 		});
 	}
 }
