@@ -21,7 +21,7 @@ router.get('/add', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
-		res.render('/job/addjob', { employee: req.session.user });
+		res.render('job/addJob', { employee: req.session.user });
 	}
 });
 router.post('/add', async (req, res) => {
@@ -43,7 +43,7 @@ router.get('/update', async (req, res) => {
 	} else {
 		let updateJob = await jobService.getjobById(req.query.jobId);
 
-		res.render('views/job/updatejob', {
+		res.render('job/updatejob', {
 			employee: req.session.user,
 			job: {
 				jobId: updateJob[0].jobId,

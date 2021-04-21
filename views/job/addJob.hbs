@@ -1,0 +1,41 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row contact-content">
+			<h1>Add Job</h1>
+			<form method="post" novalidate="novalidate">
+				<fieldset>
+					<div class="form-field">
+						<input name="jobName" type="text" placeholder="Job Name" required="" aria-required="true"
+							class="full-width">
+					</div>
+					<div class="form-field">
+						<label for="date" class="subscribe-message">Date</label>
+						<input id="date" name="date" type="text">
+					</div>
+					<div class="form-field">
+						<label for="startTime" class="subscribe-message">Start Time</label>
+						<select name="roldId">
+							{{#each job}}
+							<td>
+								{{ startTime "MM-DD-YYYY"}}
+							</td>
+							{{/each}}
+						</select>
+					</div>
+					<div class="form-field">
+						<label for="endTime" class="subscribe-message">End Time</label>
+						<input id="endTime" value="1" name="canAssginJob" type="text">
+					</div>
+					<div class="form-field">
+						<button type="submit" class="btn--primary">Submit</button>
+						<button type="button" onclick="window.location.href='/role'"
+							class="btn--primary">Cancel</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</section>
