@@ -65,7 +65,7 @@ class employeeHelper {
 
 			if (user) {
 				session.user = {
-					employeeId: user.employee,
+					employeeId: user.employeeId,
 					name: user.name,
 					canViewReport: user.canViewReport == '1' ? true : false,
 					canCreateEmployee: user.canCreateEmployee == '1' ? true : false,

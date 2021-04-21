@@ -49,11 +49,11 @@ class jobHelper {
 		});
 	}
 	async getJobByEmployeeId(employeeId) {
-		let sql = "SELECT * FROM job INNER JOIN assign ON assign.jobId = job.jodId" +
+		let sql = "SELECT * FROM job INNER JOIN assign ON assign.jobId = job.jobId " +
 			"INNER JOIN employee on employee.employeeId = assign.employeeId" +
 			" WHERE employee.employeeId =? "
-
 		let param = [employeeId];
+
 		return await dbUtli.executeSql(sql, param).then(fields => {
 			return fields && fields[0] ? fields[0] : null;
 		});

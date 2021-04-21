@@ -11,8 +11,14 @@
             {{>user this}}
             <ul class="header-nav__list">
                 <li class="current"><a class="smoothscroll"  href="/home" title="home">Home</a></li>
-                <li><a class="smoothscroll"  href="/role" title="about">Role</a></li>
-                <li><a class="smoothscroll"  href="/employee" title="about">Employee</a></li>
+                {{#if employee.canCreateEmployee}}
+                    <li><a class="smoothscroll"  href="/role" title="about">Role</a></li>
+                {{/if}}
+                {{#if employee.canCreateEmployee}}
+                    <li><a class="smoothscroll"  href="/employee" title="about">Employee</a></li>
+                {{else}}
+                    <li><a class="smoothscroll"  href="/employee/update?employeeId={{employee.employeeId}}" title="about">Employee</a></li>
+                {{/if}}
                 <li><a class="smoothscroll"  href="/job" title="services">Job</a></li>
                 <li><a class="smoothscroll"  href="/schedule" title="works">Schedule</a></li>
                 <li><a class="smoothscroll"  href="/contact" title="contact">About</a></li>

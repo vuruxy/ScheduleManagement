@@ -5,7 +5,9 @@
 	<div class="home-content">
 		<div class="row home-content__main">
 			<h1>Job Management</h1><br />
-			<input type="button" onclick="window.location.href='/job/add'" class="btn btn-primary" value="ADD" />
+			{{#if employee.canCreateJob}}
+				<input type="button" onclick="window.location.href='/job/add'" class="btn btn-primary" value="ADD" />
+			{{/if}}
 			<br /><br /><br />
 			<table class="table table-bordered" style="color:white">
 				<thead>
@@ -13,7 +15,9 @@
 						<th scope="col">Name</th>
 						<th scope="col">Start Date</th>
 						<th scope="col">End Date</th>
-						<th scope="col"></th>
+						{{#if employee.canCreateJob}}
+							<th scope="col"></th>
+						{{/if}}
 					</tr>
 				</thead>
 				<tbody>
@@ -22,12 +26,14 @@
 						<td>{{jobName}}</td>
 						<td>{{startDate}}</td>
 						<td>{{endDate}}</td>
+						{{#if ../employee.canCreateJob}}
 						<td>
 							<input type="button" onclick="window.location.href = '/job/update?jobId={{jobId}}';"
 								class="btn btn-primary" value="Update" />
 							<input type="button" onclick="window.location.href='/job/delete?jobId={{jobId}}';" class="btn btn-primary"
 								value="DELETE" />
 						</td>
+						{{/if}}
 					</tr>
 					{{/each}}
 				</tbody>

@@ -83,7 +83,12 @@ router.post('/update', async (req, res) => {
 			roleId: parseInt(req.body.roleId),
 			employeeId: parseInt(req.query.employeeId)
 		});
-		res.redirect('/employee');
+
+		if (req.session.user.canCreateEmployee) {
+			res.redirect('/employee');
+		} else {
+			res.redirect('/employee/update?employeeId=' + req.session.user.employeeId);
+		}
 	}
 });
 

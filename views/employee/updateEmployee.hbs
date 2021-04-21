@@ -28,18 +28,24 @@
 						<label for="password" class="subscribe-message">Password</label>
 						<input id="password" value="{{updateEmployee.password}}" name="password" type="text">
 					</div>
-					<div class="form-field">
-						<label for="password" class="subscribe-message">Role</label>
-						<select name="roleId">
-							{{#each roles}}
-								<option value={{roleId}} {{#if isSelected}} selected {{/if}} >{{roleName}}</option>
-							{{/each}}
-						</select>
-					</div>
+					{{#if employee.canCreateEmployee}}
+						<div class="form-field">
+							<label for="password" class="subscribe-message">Role</label>
+							<select name="roleId">
+								{{#each roles}}
+									<option value="{{roleId}}" {{#if isSelected}} selected {{/if}} >{{roleName}}</option>
+								{{/each}}
+							</select>
+						</div>
+					{{else}}
+						<input type="hidden" value="{{updateEmployee.roleId}}" name="roleId" />
+					{{/if}}
 					<div class="form-field">
 						<button type="submit" class="btn--primary">Submit</button>
+						 {{#if employee.canCreateEmployee}}
 						<button type="button" onclick="window.location.href='/employee'"
 							class="btn--primary">Cancel</button>
+						{{/if}}
 					</div>
 				</fieldset>
 			</form>

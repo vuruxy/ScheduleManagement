@@ -96,7 +96,7 @@ router.get('/delete', async (req, res) => {
 	} else {
 		await jobService.deleteJob(parseInt(req.query.jobId));
 
-		res.redirect('/job');
+		res.red('/job');
 	}
 });
 
