@@ -17,17 +17,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					{{#each job}}
+					{{#each jobs}}
 					<tr>
 						<td>{{jobName}}</td>
-						<td>{{Start}}</td>
-						<td>{{End}}</td>
-						<td>{{createJob}}</td>
+						<td>{{startDate}}</td>
+						<td>{{endDate}}</td>
 						<td>
-							<input type="button" onclick="window.location.href = '/job/add?job={{job}}';"
-								class="btn btn-primary" value="Add" />
-							<input type="button" onclick="window.location.href='/employee';" class="btn btn-primary"
-								value="CANCEL" />
+							<input type="button" onclick="window.location.href = '/job/update?jobId={{jobId}}';"
+								class="btn btn-primary" value="Update" />
+							<input type="button" onclick="window.location.href='/job/delete?jobId={{jobId}}';" class="btn btn-primary"
+								value="DELETE" />
 						</td>
 					</tr>
 					{{/each}}

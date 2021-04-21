@@ -21,7 +21,14 @@ router.get('/add', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
-		res.render('job/addJob', { employee: req.session.user });
+		let time = [];
+		for (i = 6; i <= 18; i = i + 0.5) {
+			time.push(Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00'));
+		}
+		res.render('job/addJob', { 
+			employee: req.session.user,
+			time: time
+		});
 	}
 });
 router.post('/add', async (req, res) => {
@@ -41,17 +48,30 @@ router.get('/update', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
 		res.redirect('/login');
 	} else {
-		let updateJob = await jobService.getjobById(req.query.jobId);
+		let updateJob = await jobService.getJobById(req.query.jobId);
 
+		let time = [];
+		let startTime =	updateJob.startDate.getHours() + ':' + (updateJob.startDate.getMinutes().toString().length == 1 ? updateJob.startDate.getMinutes() + '0' : updateJob.startDate.getMinutes());
+		let endTime = updateJob.endDate.getHours() + ':' + (updateJob.endDate.getMinutes().toString().length == 1 ? updateJob.endDate.getMinutes() + '0' : updateJob.endDate.getMinutes());
+		for (i = 6; i <= 18; i = i + 0.5) {
+			let t = Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00');
+			time.push({
+				time: t,
+				isStartTime: startTime == t,
+				isEndTime: endTime == t
+			});
+		}
+		
 		res.render('job/updatejob', {
 			employee: req.session.user,
 			job: {
-				jobId: updateJob[0].jobId,
-				jobName: updateJob[0].jobName,
-				date: updateJob[0].startDate.getFullYear() + '-' + (updateJob[0].startDate.getMonth() + 1) + '-' + (updateJob[0].startDate.getDay() + 1),
-				startTime: updateJob[0].startDate.getHours() + ':' + (updateJob[0].startDate.getMinutes().toString().length == 1 ? updateJob[0].startDate.getMinutes() + '0' : updateJob[0].startDate.getMinutes()),
-				endTime: updateJob[0].endDate.getHours() + ':' + (updateJob[0].endDate.getMinutes().toString().length == 1 ? updateJob[0].endDate.getMinutes() + '0' : updateJob[0].endDate.getMinutes())
-			}
+				jobId: updateJob.jobId,
+				jobName: updateJob.jobName,
+				jobDate: updateJob.startDate.getFullYear() + '-' + (updateJob.startDate.getMonth() + 1) + '-' + (updateJob.startDate.getDate()),
+				startTime: startTime,
+				endTime: endTime
+			},
+			time: time
 		});
 	}
 });
@@ -63,7 +83,7 @@ router.post('/update', async (req, res) => {
 			jobName: req.body.jobName,
 			startDate: req.body.date + ' ' + req.body.startTime,
 			endDate: req.body.date + ' ' + req.body.endTime,
-			jobId: req.body.jobId
+			jobId: req.query.jobId
 		});
 
 		res.redirect('/job');
@@ -76,13 +96,7 @@ router.get('/delete', async (req, res) => {
 	} else {
 		await jobService.deleteJob(parseInt(req.query.jobId));
 
-		res.render('views/notification/alert', {
-			employee: req.session.user,
-			title: "Job Management",
-			message: "Job is deleted successfuly",
-			redirect: "/job",
-			redirectMessage: "Go Back To Job"
-		});
+		res.redirect('/job');
 	}
 });
 

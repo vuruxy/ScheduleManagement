@@ -17,21 +17,23 @@
 					</div>
 					<div class="form-field">
 						<label for="startTime" class="subscribe-message">Start Time</label>
-						<select name="roldId">
-							{{#each job}}
-							<td>
-								{{ startTime "MM-DD-YYYY"}}
-							</td>
+						<select name="startTime">
+							{{#each time}}
+								<option value="{{this}}">{{this}}</option>
 							{{/each}}
 						</select>
 					</div>
 					<div class="form-field">
-						<label for="endTime" class="subscribe-message">End Time</label>
-						<input id="endTime" value="1" name="canAssginJob" type="text">
+						<label for="end" class="subscribe-message">Start Time</label>
+						<select name="endTime">
+							{{#each time}}
+								<option value="{{this}}">{{this}}</option>
+							{{/each}}
+						</select>
 					</div>
 					<div class="form-field">
 						<button type="submit" class="btn--primary">Submit</button>
-						<button type="button" onclick="window.location.href='/role'"
+						<button type="button" onclick="window.location.href='/job'"
 							class="btn--primary">Cancel</button>
 					</div>
 				</fieldset>
@@ -39,3 +41,10 @@
 		</div>
 	</div>
 </section>
+<script>
+    $( function() {
+      $( "#date" ).datepicker({
+        dateFormat: "yy-mm-dd"
+      });
+    } );
+</script>

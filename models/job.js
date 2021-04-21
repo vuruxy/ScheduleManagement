@@ -7,17 +7,17 @@ module.exports = {
 	getUnAssignJobs: async () => {
 		return await _jobHelper.getUnAssignJobs();
 	},
-	getJobs: async (jobId) => {
-		return await _jobHelper.getJobs(jobId);
-	},
-	getJobById: async () => {
+	getJobs: async () => {
 		return await _jobHelper.getJobs();
 	},
+	getJobById: async (jobId) => {
+		return await _jobHelper.getJobById(jobId);
+	},
 	setJobs: async (job) => {
-		return await _jobHelper.setJobs(job);
+		return await _jobHelper.setJob(job);
 	},
 	updateJob: async (job) => {
-		return await _jobHelper.updatejob(job);
+		return await _jobHelper.updateJob(job);
 	},
 	deleteJob: async (jobId) => {
 		return await _jobHelper.deleteJob(jobId);
@@ -45,7 +45,7 @@ class jobHelper {
 		let param = [jobId];
 
 		return await dbUtli.executeSql(sql, param).then(fields => {
-			return fields;
+			return fields && fields[0] ? fields[0] : null;
 		});
 	}
 	async getJobByEmployeeId(employeeId) {
