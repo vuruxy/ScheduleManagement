@@ -3,6 +3,7 @@ let express = require('express');
 let router = express.Router();
 let jobService = require('../models/job');
 let employeeService = require('../models/employee');
+let config = require('../config.json');
 
 router.get('/', async (req, res) => {
 	if (!employeeService.isLogIn(req.session.user)) {
@@ -22,7 +23,7 @@ router.get('/add', async (req, res) => {
 		res.redirect('/login');
 	} else {
 		let time = [];
-		for (i = 6; i <= 18; i = i + 0.5) {
+		for (i = config.startTime; i <= config.endTime; i = i + 0.5) {
 			time.push(Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00'));
 		}
 		res.render('job/addJob', { 
@@ -53,7 +54,7 @@ router.get('/update', async (req, res) => {
 		let time = [];
 		let startTime =	updateJob.startDate.getHours() + ':' + (updateJob.startDate.getMinutes().toString().length == 1 ? updateJob.startDate.getMinutes() + '0' : updateJob.startDate.getMinutes());
 		let endTime = updateJob.endDate.getHours() + ':' + (updateJob.endDate.getMinutes().toString().length == 1 ? updateJob.endDate.getMinutes() + '0' : updateJob.endDate.getMinutes());
-		for (i = 6; i <= 18; i = i + 0.5) {
+		for (i = config.startTime; i <= config.endTime; i = i + 0.5) {
 			let t = Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00');
 			time.push({
 				time: t,

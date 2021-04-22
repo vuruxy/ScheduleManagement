@@ -21,7 +21,9 @@
                 {{/if}}
                 <li><a class="smoothscroll"  href="/job" title="services">Job</a></li>
                 <li><a class="smoothscroll"  href="/schedule" title="works">Schedule</a></li>
-                <li><a class="smoothscroll"  href="/contact" title="contact">About</a></li>
+                {{#if employee.canViewReport}}
+                    <li><a class="smoothscroll"  href="/Report" title="contact">Report</a></li>
+                {{/if}}
             </ul>
         </div> 
     </nav>

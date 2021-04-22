@@ -1,0 +1,27 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+    <div class="overlay"></div>
+    <div class="shadow-overlay"></div>
+    <div class="home-content">
+        <div class="row home-content__main">
+            <h1>Report</h1>
+            <table class="highchart" id="hightChart" data-graph-container-before="1" data-graph-type="column">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Finish Job</th>
+                        <th>UnFinish Job</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each jobs}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{finishCount}}</td>
+                            <td>{{unfinishCount}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

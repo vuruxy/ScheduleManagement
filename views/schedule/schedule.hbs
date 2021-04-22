@@ -1,0 +1,272 @@
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg"
+	data-natural-width="3000" data-natural-height="2000" data-position-y="center">
+	<div class="overlay"></div>
+	<div class="shadow-overlay"></div>
+	<div class="home-content">
+		<div class="row home-content__main">
+			<h1>Schedule Management</h1>
+            <div class="pagin">
+                <a href="javascript:prev()" class="previous">&laquo; Previous</a>
+                <a href="javascript:void(0)" id="weekInfo"></a>
+                <a href="javascript:next()" class="next">Next &raquo;</a>
+            </div>
+            {{#if employee.canAssginJob}}
+                <select id="staff" style="float: right; margin: 10px;">
+                    <option value="0">Please select a staff</option>
+                    {{#each employees}}
+                        <option value="{{employeeId}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            {{else}}
+                <input type="hidden" value="{{employee.employeeId}}" id="staff" />
+            {{/if}}
+            <table style="height: 85%; width: 100%; border: 1px solid white;">
+                <tr>
+                    {{#if employee.canAssginJob}} 
+                        <td style="height: 100%; width: 20%; border-right: 1px solid white; vertical-align: top;">
+                            <div style="height: 100%; width: 100%; position: relative;">
+                                <ul id="tasks" class="list-group" style="margin-left: 0px; position: absolute; overflow-x: hidden; overflow-y: auto; height: 100%; width: 100%;">
+                                    {{#each unAssignJobs}}
+                                        <li style="margin: 5px; cursor: pointer; list-style: none;border: 1px solid #4CAF50" value="{{jobId}}" class="list-group-item">{{jobName}}</li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </td>
+                    {{/if}}
+                    <td style="height: 100%; width: 80%; vertical-align: top;">
+                        <div style="height: 100%; width: 100%; position: relative;">
+                            <table id="schedule" style="position: static !important; overflow: auto; height: 100%; width: 100%; color: white">
+                                <tr>
+                                    <td style="width: 9%; border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Mon</td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Tue</td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Web</td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Thurs</td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Fri</td>
+                                    <td style="width: 13%; border-right: 1px solid white; border-bottom: 1px solid white; text-align: center;">Sat</td>
+                                    <td style="width: 13%; border-bottom: 1px solid white;">Sun</td>
+                                </tr>
+                                {{#each time}}
+                                    <tr>
+                                        <td style="border-right: 1px solid white; border-bottom: 1px solid white;">{{value}}</td>
+                                        <td id="Mon{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Tue{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Web{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Thu{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Fri{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Sat{{key}}" style="border-right: 1px solid white; border-bottom: 1px solid white;"></td>
+                                        <td id="Sun{{key}}" style="border-bottom: 1px solid white;"></td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+<div id="dialog">
+    Job: <label style="color: black !important;" id="taskName"></label><br />
+    Employee: <label style="color: black !important;" id="staffName"></label><br />
+    Start Date: <label style="color: black !important;" id="startDate"></label><br />
+    End Date: <label style="color: black !important;" id="endDate"></label><br />
+    Done: <input type="checkbox" id="jobDoneCheck" /><br />
+    <input type="hidden" id="jobId" value="" />
+    <a href="javascript:doneJob()" class="previous">SUBMIT</a>
+</div>
+<script type="text/javascript">
+    var currentWeek = getWeek(new Date());
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", 
+                            "Nov", "Dec"];
+        const dayNames = ["Mon", "Tue", "Web", "Thu", "Fri", "Sat", "Sun"];
+
+        function getWeek(date) {
+            return {
+                monday: moment(date).startOf('week').add(1, 'days').toDate(),
+                sunday: moment(date).endOf('week').add(1, 'days').toDate()
+            }
+        }
+
+        function prev() {
+            var weekInfo = currentWeek;        
+            weekInfo = getWeek(moment(weekInfo.monday).subtract(5, 'days').toDate()); 
+            currentWeek = weekInfo;
+
+            $('#weekInfo').html(weekInfo.monday.getDate() + '-' + monthNames[weekInfo.monday.getMonth()] + 
+                            '-' + weekInfo.monday.getFullYear() + ' To ' + weekInfo.sunday.getDate() + 
+                            '-' + monthNames[weekInfo.sunday.getMonth()] + 
+                            '-' + weekInfo.sunday.getFullYear());
+            getSchedules();
+        }
+
+        function next() {
+            var weekInfo = currentWeek; 
+            weekInfo = getWeek(moment(weekInfo.sunday).add(5, 'days').toDate()); 
+            currentWeek = weekInfo;
+            $('#weekInfo').html(weekInfo.monday.getDate() + '-' + monthNames[weekInfo.monday.getMonth()] + 
+                            '-' + weekInfo.monday.getFullYear() + ' To ' + weekInfo.sunday.getDate() + 
+                            '-' + monthNames[weekInfo.sunday.getMonth()] + 
+                            '-' + weekInfo.sunday.getFullYear());
+                            getSchedules();
+        }
+    $(function() {
+        var weekInfo = currentWeek; 
+     
+        $('#weekInfo').html(weekInfo.monday.getDate() + '-' + monthNames[weekInfo.monday.getMonth()] + 
+                            '-' + weekInfo.monday.getFullYear() + ' To ' + weekInfo.sunday.getDate() + 
+                            '-' + monthNames[weekInfo.sunday.getMonth()] + 
+                            '-' + weekInfo.sunday.getFullYear());
+
+        $("#tasks li").draggable({
+            revert: "invalid",
+            refreshPositions: true,
+            appendTo: 'body',
+            containment: 'window',
+            scroll: false,
+            helper: 'clone',
+            containment: $('#main'),
+            drag: function (event, ui) {
+                ui.helper.addClass("draggable");
+            },
+            stop: function (event, ui) {
+                ui.helper.removeClass("draggable");
+            }
+        });
+
+        $("#schedule").droppable({
+            drop: function (event, ui) {
+                addSchedule($(ui.draggable).val(), () => {
+                    ui.draggable.addClass("dropped");
+                    getSchedules(() => {
+                        $(ui.draggable).remove();
+                    });
+                });
+            }
+        });
+
+        $('#staff').change(() => {
+            getSchedules();
+        });
+
+        $('#dialog').dialog({
+            title: "Job"
+        });
+        $('#dialog').dialog("close");
+
+        $('#schedule td').on('click', (event) => {
+            let taskId = $(event.target).attr('data-id');
+
+            if (taskId) {
+                getSchedule(taskId, (data) => {
+                    $('#staffName').html(data.name);
+                    $('#taskName').html(data.jobName);
+                    $('#startDate').html(data.startDate);
+                    $('#endDate').html(data.endDate);
+                    $('#jobId').val(data.jobId);
+                    $('#jobDoneCheck').prop('checked', data.isDone == "1");
+                    $('#dialog').dialog("open");
+                });
+            }
+        });
+
+        {{#if employee.canAssginJob}} 
+        {{else}}
+            getSchedules();
+        {{/if}}
+    });
+
+    function addSchedule(taskId, callback) {
+        if ( $('#staff').val() == 0) {
+            alert('Please select a staff');
+        } else {
+            $.post('schedule/assignJob', {
+                employeeId: $('#staff').val(),
+                jobId: taskId
+            }, (data) => {
+                if (callback) callback();
+            });   
+        }
+    }
+
+    function getSchedules(callback) {
+        $.post('schedule/getJob', {
+            employeeId: $('#staff').val(),
+            startDate: getFormattedStartDate(currentWeek.monday),
+            endDate: getFormattedEndDate(currentWeek.sunday)
+        }, (data) => {
+            clearData();
+            fillData(data);
+            if (callback) callback();
+        });
+    }
+
+    function getSchedule(taskId, callback) {
+        $.post('schedule/getJobById', {
+            jobId: taskId
+        }, (data) => {
+            if (callback) callback(data);
+        });
+    }
+
+    function clearData() {
+        $('#schedule td').css('background-color', '');
+        $('#schedule td').attr('data-id', '');
+    }
+
+    function fillData(data) {
+        if (data && data.jobs) {
+            data.jobs.map(d => {
+                let startDate = new Date(d.startDate);
+                let endDate = new Date(d.endDate);
+                let cWeekStartDate = currentWeek.monday;
+                let cWeekEndDate = currentWeek.sunday;
+
+                cWeekEndDate.setHours(23);
+                cWeekEndDate.setMinutes(59);
+                cWeekEndDate.setSeconds(59);
+
+                if (startDate >= cWeekStartDate && endDate <= cWeekEndDate) {
+                    let colDay = dayNames[startDate.getDay() - 1];
+                    let sh = startDate.getHours();
+                    let sm = startDate.getMinutes() == 30 ? 0.5 : 0;
+                    let st = sh + sm;
+                    let eh = endDate.getHours();
+                    let em = endDate.getMinutes() == 30 ? 0.5 : 0;
+                    let et = eh + em;
+
+                    for (i = 0; i < 24; i = i + 0.5) {
+                        if (st <= i && et >= i) {
+                            let val = Math.trunc(i) + (i % 1 > 0 ? '30' : '00');
+                            $('#' + colDay + val).css('background-color', d.isDone == "1" ? 'green' : 'red');
+                            $('#' + colDay + val).attr('data-id', d.jobId);
+                        }
+                    } 
+                }
+            });
+        }
+    }    
+
+    function getFormattedStartDate(date) {
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' 00:00:00';
+    }
+
+    function getFormattedEndDate(date) {
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' 23:59:59';
+    }
+
+    function doneJob() {
+        let isDone = "0";
+        if ($('#jobDoneCheck').is(":checked")) {
+            isDone = "1";
+        }
+
+        $.post('schedule/setJobDone', {
+            jobId: $('#jobId').val(),
+            isDone: isDone
+        }, (data) => {
+            getSchedules();
+            $('#dialog').dialog("close");
+        });
+    }
+</script>

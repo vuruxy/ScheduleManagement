@@ -10,6 +10,8 @@ const employeeController = require('./controllers/employee');
 const loginController = require('./controllers/login');
 const roleController = require('./controllers/role');
 const jobCrontoller = require('./controllers/job');
+const scheduleController = require('./controllers/schedule');
+const reportController = require('./controllers/report');
 
 app.set('view engine', 'hbs');
 app.engine('hbs', handlebars({
@@ -38,6 +40,8 @@ app.use('/employee', employeeController);
 app.use('/login', loginController);
 app.use('/role', roleController);
 app.use('/job', jobCrontoller);
+app.use('/schedule', scheduleController);
+app.use('/report', reportController);
 
 app.listen(config.port, () => {
     console.log('Applicaton Start');
