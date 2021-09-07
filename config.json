@@ -9,5 +9,7 @@
   },
   "port": 8080,
   "host": "localhost",
-  "title": "ScheduleManagements"
+  "title": "ScheduleManagements",
+  "startTime": 18,
+  "endTime": 22
 }

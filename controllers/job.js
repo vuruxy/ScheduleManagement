@@ -26,7 +26,7 @@ router.get('/add', async (req, res) => {
 		for (i = config.startTime; i <= config.endTime; i = i + 0.5) {
 			time.push(Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00'));
 		}
-		res.render('job/addJob', { 
+		res.render('job/addJob', {
 			employee: req.session.user,
 			time: time
 		});
@@ -52,7 +52,7 @@ router.get('/update', async (req, res) => {
 		let updateJob = await jobService.getJobById(req.query.jobId);
 
 		let time = [];
-		let startTime =	updateJob.startDate.getHours() + ':' + (updateJob.startDate.getMinutes().toString().length == 1 ? updateJob.startDate.getMinutes() + '0' : updateJob.startDate.getMinutes());
+		let startTime = updateJob.startDate.getHours() + ':' + (updateJob.startDate.getMinutes().toString().length == 1 ? updateJob.startDate.getMinutes() + '0' : updateJob.startDate.getMinutes());
 		let endTime = updateJob.endDate.getHours() + ':' + (updateJob.endDate.getMinutes().toString().length == 1 ? updateJob.endDate.getMinutes() + '0' : updateJob.endDate.getMinutes());
 		for (i = config.startTime; i <= config.endTime; i = i + 0.5) {
 			let t = Math.trunc(i) + ':' + (i % 1 > 0 ? '30' : '00');
@@ -62,7 +62,7 @@ router.get('/update', async (req, res) => {
 				isEndTime: endTime == t
 			});
 		}
-		
+
 		res.render('job/updatejob', {
 			employee: req.session.user,
 			job: {
@@ -97,7 +97,7 @@ router.get('/delete', async (req, res) => {
 	} else {
 		await jobService.deleteJob(parseInt(req.query.jobId));
 
-		res.red('/job');
+		res.redirect('/job');
 	}
 });
 

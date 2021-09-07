@@ -7,16 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Zanhtet/ScheduleManagement.git"
-  },
+  "repository": {},
   "author": "Kaung Htet Oo",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Zanhtet/ScheduleManagement/issues"
-  },
-  "homepage": "https://github.com/Zanhtet/ScheduleManagement#readme",
+  "bugs": {},
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
